@@ -206,7 +206,7 @@ def show_data():
             ("Phone: ", item_values[6]),
             ("Purpose: ", item_values[7]),
             ("Compilation time: ", item_values[8]),
-            ("Voided: ", item_values[9]),
+            ("Status: ", item_values[9]),
         ]
 
         for label, value in lines:
@@ -471,7 +471,7 @@ table.heading("Affiliation", text="Affiliation")
 table.heading("Phone", text="Phone")
 table.heading("Purpose of visit", text="Purpose of visit")
 table.heading("Compilation time", text="Compilation Time")
-table.heading("Voided", text="Voided")
+table.heading("Voided", text="Status")
 
 # Fetch and display data
 data = fetch_queue_data()

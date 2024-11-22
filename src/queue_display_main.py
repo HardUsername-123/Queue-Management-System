@@ -70,19 +70,21 @@ cashier_c2 = ttk.Label(q_display,
                           font=('Helvetica', 32, 'bold'))
 cashier_c2.grid(row=2, column=0, sticky='nsew', padx=10, pady=10)
 
-scholarship_label = ttk.Label(q_display,
-                              text='SCHOLARSHIP\nCOORDINATOR',
-                              
-                              anchor='center',
-                              font=('Helvetica', 32, 'bold'))
-scholarship_label.grid(row=3, column=0, sticky='nsew', padx=10, pady=10)
-
 promissory_label = ttk.Label(q_display,
                              text='PROMISSORY \nNOTE\nCOORDINATOR',
                              
                              anchor='center',
                              font=('Helvetica', 32, 'bold'))
-promissory_label.grid(row=4, column=0, sticky='nsew', padx=10, pady=10)
+promissory_label.grid(row=3, column=0, sticky='nsew', padx=10, pady=10)
+
+scholarship_label = ttk.Label(q_display,
+                              text='SCHOLARSHIP\nCOORDINATOR',
+                              
+                              anchor='center',
+                              font=('Helvetica', 32, 'bold'))
+scholarship_label.grid(row=4, column=0, sticky='nsew', padx=10, pady=10)
+
+
 
 # Preparing queue number------------------------------------------------------------------------------------
 try:

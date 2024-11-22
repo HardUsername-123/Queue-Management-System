@@ -238,7 +238,7 @@ def cashier_window(op_name, op_area, op_id):
                             item_values[2],  # affiliation
                             item_values[6],  # phone
                             item_values[1],  # purpose_of_visit
-                            item_values[7]   # voided
+                            "Completed"  # voided
                         ))
                         conn.commit()
 
@@ -296,7 +296,7 @@ def cashier_window(op_name, op_area, op_id):
                             item_values[2],  # affiliation
                             item_values[6],  # phone
                             item_values[1],  # purpose_of_visit
-                            "Yes"   # voided
+                            "Voided"   # voided
                         ))
                         conn.commit()
 
