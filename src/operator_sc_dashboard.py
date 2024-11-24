@@ -7,6 +7,15 @@ from mysql.connector import Error
 from tkinter import ttk, messagebox  # Added messagebox for displaying warnings
 
 
+import pygame
+
+def play_sound():
+    pygame.mixer.init()
+    pygame.mixer.music.load("queue_sound.wav")  # Replace with your sound file
+    pygame.mixer.music.play()
+
+
+
 def sc_window(op_name, op_area, op_id):
     scholar = ctk.CTk()
     scholar.title("Scholarship coordinator")
@@ -236,7 +245,7 @@ def sc_window(op_name, op_area, op_id):
                             item_values[2],  # affiliation
                             item_values[6],  # phone
                             item_values[1],  # purpose_of_visit
-                            item_values[7]   # voided
+                            "Completed"  # voided
                         ))
                         conn.commit()
 
@@ -295,7 +304,7 @@ def sc_window(op_name, op_area, op_id):
                             item_values[2],  # affiliation
                             item_values[6],  # phone
                             item_values[1],  # purpose_of_visit
-                            "Yes"   # voided
+                            "Voided"   # voided
                         ))
                         conn.commit()
 
@@ -377,7 +386,6 @@ def sc_window(op_name, op_area, op_id):
     # Selected item storage
     selected_item = None
 
-
     import socket
             # Socket setup
     SERVER_HOST = "127.0.0.1"  # Server's IP address (same as the server's host)
@@ -392,6 +400,11 @@ def sc_window(op_name, op_area, op_id):
 
             # Send data to the server
             client_socket.send(data.encode('utf-8'))
+
+            if data == "0":
+                print("0")
+            else:
+                play_sound()
 
             # Close the connection
             client_socket.close()
@@ -425,6 +438,7 @@ def sc_window(op_name, op_area, op_id):
             # Clear the "Serving" and "Preparing" labels
             prep_num.configure(text="00")
             # serve_num.configure(text="00")
+            send_to_server("0")
             return  # Exit the function early if tb1 has no data
 
         # Get the first item (the one that is being served)

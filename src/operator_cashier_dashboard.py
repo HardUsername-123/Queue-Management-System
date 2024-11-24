@@ -9,6 +9,13 @@ from operator_cashier2_dashboard import cashier_window2
 
 import socket
 
+import pygame
+
+def play_sound():
+    pygame.mixer.init()
+    pygame.mixer.music.load("queue_sound.wav")  # Replace with your sound file
+    pygame.mixer.music.play()
+
 
 def cashier_window(op_name, op_area, op_id):
     counter_staff = ctk.CTk()
@@ -396,6 +403,11 @@ def cashier_window(op_name, op_area, op_id):
             # Send data to the server
             client_socket.send(data.encode('utf-8'))
 
+            if data == "0":
+                print("0")
+            else:
+                play_sound()
+
             # Close the connection
             client_socket.close()
         except Exception as e:
@@ -405,6 +417,9 @@ def cashier_window(op_name, op_area, op_id):
 
     # Modified `call_ticket` function
     def call_ticket():
+
+        
+
         conn = create_connection()
         if conn is None:
             print("Failed to connect to the database.")
@@ -421,6 +436,7 @@ def cashier_window(op_name, op_area, op_id):
         if not children:
             messagebox.showinfo("No Data", "No tickets found in the queue to process.")
             prep_num.configure(text="00")
+            send_to_server("0")
             # serve_num.configure(text="00")
             return
 

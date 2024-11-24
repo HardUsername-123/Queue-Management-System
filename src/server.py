@@ -1,5 +1,7 @@
 import socket
 import threading
+from tkinter import scrolledtext
+import tkinter as tk
 
 # Server setup
 host = "127.0.0.1"  # Localhost

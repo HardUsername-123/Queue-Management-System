@@ -214,7 +214,7 @@ def receive_data_in_background_C3():
             print(data)
 
             # Update the label text in the GUI thread
-            update_label_text_C3(data)
+            # update_label_text_C3(data)
     except Exception as e:
         print(f"Error receiving data from server: {e}")
         messagebox.showerror("Connection Error", "Unable to receive data from the server.")
@@ -222,6 +222,7 @@ def receive_data_in_background_C3():
 # Function to update the label text (executed in the GUI thread)
 def update_label_text_C3(data):
     p_sc_number3.config(text=data)  # Update the label with received data
+    
 # Start the background thread
 def start_receiving_C3():
     thread = threading.Thread(target=receive_data_in_background_C3, daemon=True)

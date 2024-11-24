@@ -7,6 +7,13 @@ from mysql.connector import Error
 from tkinter import ttk, messagebox  # Added messagebox for displaying warnings
 
 
+import pygame
+
+def play_sound():
+    pygame.mixer.init()
+    pygame.mixer.music.load("queue_sound.wav")  # Replace with your sound file
+    pygame.mixer.music.play()
+
 def pnc_window(op_name, op_area, op_id):
     promisorry = ctk.CTk()
     promisorry.title("Promisorry note")
@@ -41,6 +48,7 @@ def pnc_window(op_name, op_area, op_id):
     x = (screen_width // 2) - (window_width // 2)
     y = (screen_height // 2) - (window_height // 2)
     promisorry.geometry(f"{window_width}x{window_height}+{x}+{y}")
+    
 
     # Create the main frame for navigation
     nav_frame = ctk.CTkFrame(promisorry, width=700, height=60, fg_color='#d68b26')
@@ -234,7 +242,7 @@ def pnc_window(op_name, op_area, op_id):
                             item_values[2],  # affiliation
                             item_values[6],  # phone
                             item_values[1],  # purpose_of_visit
-                            item_values[7]   # voided
+                            "Completed"  # voided
                         ))
                         conn.commit()
 
@@ -292,7 +300,7 @@ def pnc_window(op_name, op_area, op_id):
                             item_values[2],  # affiliation
                             item_values[6],  # phone
                             item_values[1],  # purpose_of_visit
-                            "Yes"   # voided
+                            "Voided"   # voided
                         ))
                         conn.commit()
 
@@ -374,6 +382,8 @@ def pnc_window(op_name, op_area, op_id):
     # Selected item storage
     selected_item = None
 
+
+
     import socket
             # Socket setup
     SERVER_HOST = "127.0.0.1"  # Server's IP address (same as the server's host)
@@ -389,6 +399,11 @@ def pnc_window(op_name, op_area, op_id):
             # Send data to the server
             client_socket.send(data.encode('utf-8'))
 
+            if data == "0":
+                print("0")
+            else:
+                play_sound()
+            
             # Close the connection
             client_socket.close()
         except Exception as e:
@@ -420,6 +435,7 @@ def pnc_window(op_name, op_area, op_id):
             messagebox.showinfo("No Data", "No tickets found in the queue to process.")
             # Clear the "Serving" and "Preparing" labels
             prep_num.configure(text="00")
+            send_to_server("0")
             # serve_num.configure(text="00")
             return  # Exit the function early if tb1 has no data
 

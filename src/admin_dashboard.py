@@ -1395,6 +1395,14 @@ def insert_student_data(school_id, fullname, course, year, connection, cursor, a
         elif not re.match(school_id_pattern, school_id):
             messagebox.showerror("Add Record", "Error: Invalid school ID format. Please use 'XX-XXXX' format (e.g., '00-0000').")
             return  # Exit the function if validation fails  
+        
+        check_id = "SELECT school_id FROM student WHERE school_id = %s"
+        cursor.execute(check_id, (school_id,))
+        result_id = cursor.fetchone()
+
+        if result_id:        
+            messagebox.showinfo("Warning",f"The ID {school_id} already exist.")
+            return
           
 
         query = "INSERT INTO student (school_id, full_name, course, year_level) VALUES (%s, %s, %s, %s)"
@@ -1428,6 +1436,14 @@ def insert_member_data(school_id, fullname, affiliation, role, office, connectio
         elif not re.match(school_id_pattern, school_id):
             messagebox.showerror("Add member Record", "Error: Invalid school ID format. Please use 'XX-XXXX' format (e.g., '00-0000').")
             return  # Exit the function if validation fails  
+        
+        check_id = "SELECT school_id FROM member WHERE school_id = %s"
+        cursor.execute(check_id, (school_id,))
+        result_id = cursor.fetchone()
+
+        if result_id:        
+            messagebox.showinfo("Warning",f"The ID {school_id} already exist.")
+            return
           
 
         query = "INSERT INTO member (school_id, full_name, affiliation, role, office) VALUES (%s, %s, %s, %s,%s)"
@@ -1484,6 +1500,14 @@ def insert_password_data(school_id, fullname, operate_area, phone_num, username,
         
         if existing_user:
             messagebox.showerror("Add operator record", "Error: Username already exists. Please choose a different username.")
+            return
+        
+        check_id = "SELECT school_id FROM operator WHERE school_id = %s"
+        cursor.execute(check_id, (school_id,))
+        result_id = cursor.fetchone()
+
+        if result_id:        
+            messagebox.showinfo("Warning",f"The ID {school_id} already exist.")
             return
 
         # Insert the new operator data if validations pass
