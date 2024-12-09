@@ -13,7 +13,7 @@ import pygame
 
 def play_sound():
     pygame.mixer.init()
-    pygame.mixer.music.load("queue_sound.wav")  # Replace with your sound file
+    pygame.mixer.music.load("C:\\Users\\QHTF\\OneDrive\\Desktop\\new_queue_system\\QMS-python-gui-main\\queue_sound.wav")  # Replace with your sound file
     pygame.mixer.music.play()
 
 
@@ -398,27 +398,30 @@ def cashier_window(op_name, op_area, op_id):
         try:
             # Create a socket connection
             client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-            client_socket.connect((SERVER_HOST, SERVER_PORT))
+            client_socket.connect((SERVER_HOST, SERVER_PORT))  # Connect to the server
 
             # Send data to the server
             client_socket.send(data.encode('utf-8'))
 
-            if data == "0":
-                print("0")
-            else:
+            print(f"Sent: {data}")  # Log the sent data for debugging
+
+            # Play sound after sending data (optional, remove if unnecessary)
+            if data != "0":  # Adjust condition based on your logic
                 play_sound()
 
-            # Close the connection
-            client_socket.close()
+        except ConnectionRefusedError:
+            print("Server is not available. Connection refused.")
+            messagebox.showerror("Connection Error", "Unable to connect to the server.")
         except Exception as e:
-            print(f"Error sending data to server: {e}")
-            messagebox.showerror("Connection Error", "Unable to send data to the server.")
-            
+            print(f"Unexpected error: {e}")
+            messagebox.showerror("Connection Error", f"Error sending data: {e}")
+        finally:
+            # Ensure the socket is closed properly
+            client_socket.close()
 
     # Modified `call_ticket` function
     def call_ticket():
-
-        
+          
 
         conn = create_connection()
         if conn is None:

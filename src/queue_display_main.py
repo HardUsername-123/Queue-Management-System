@@ -7,6 +7,8 @@ from mysql.connector import Error
 from tkinter import messagebox
 
 import socket
+import pygame
+
 
 # Initialize the queue display window with ttkbootstrap
 q_display = ttk.Window(themename="flatly")  # 'superhero' theme for a modern dark design
@@ -146,10 +148,10 @@ def receive_data_in_background():
             response = client_socket.recv(1024)  # Adjust buffer size as needed
             data = response.decode('utf-8')
 
-            print(data)
 
             # Update the label text in the GUI thread
-            update_label_text(data)
+            q_display.after(0, update_label_text, data)
+            # update_label_text(data)
     except Exception as e:
         print(f"Error receiving data from server: {e}")
         messagebox.showerror("Connection Error", "Unable to receive data from the server.")
@@ -157,6 +159,7 @@ def receive_data_in_background():
 # Function to update the label text (executed in the GUI thread)
 def update_label_text(data):
     p_c_number1.config(text=data)  # Update the label with received data
+    
 # Start the background thread
 def start_receiving():
     thread = threading.Thread(target=receive_data_in_background, daemon=True)
@@ -179,10 +182,10 @@ def receive_data_in_background_c2():
             response = client_socket.recv(1024)  # Adjust buffer size as needed
             data = response.decode('utf-8')
 
-            print(data)
 
             # Update the label text in the GUI thread
-            update_label_text_c2(data)
+            q_display.after(0, update_label_text_c2, data)
+            # update_label_text_c2(data)
     except Exception as e:
         print(f"Error receiving data from server: {e}")
         messagebox.showerror("Connection Error", "Unable to receive data from the server.")
@@ -211,10 +214,10 @@ def receive_data_in_background_C3():
             response = client_socket.recv(1024)  # Adjust buffer size as needed
             data = response.decode('utf-8')
 
-            print(data)
 
             # Update the label text in the GUI thread
             # update_label_text_C3(data)
+            q_display.after(0, update_label_text_C3, data)
     except Exception as e:
         print(f"Error receiving data from server: {e}")
         messagebox.showerror("Connection Error", "Unable to receive data from the server.")
@@ -244,10 +247,10 @@ def receive_data_in_background_C4():
             response = client_socket.recv(1024)  # Adjust buffer size as needed
             data = response.decode('utf-8')
 
-            print(data)
 
             # Update the label text in the GUI thread
-            update_label_text_C4(data)
+            # update_label_text_C4(data)
+            q_display.after(0, update_label_text_C4, data)
     except Exception as e:
         print(f"Error receiving data from server: {e}")
         messagebox.showerror("Connection Error", "Unable to receive data from the server.")

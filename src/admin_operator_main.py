@@ -41,7 +41,7 @@ def example():
     image_label.pack(pady=(20, 10))
     
     # Create a bold heading label under the image
-    heading_label = ctk.CTkLabel(frame, text="NCMC Data Queue System",
+    heading_label = ctk.CTkLabel(frame, text="Queue Management System\n of Finance Department",
                                 font=ctk.CTkFont(size=50, weight="bold"), 
                                 text_color="#000000", anchor="center")
     heading_label.pack(pady=(10, 10))
