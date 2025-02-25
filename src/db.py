@@ -6,7 +6,7 @@ def create_connection():
         conn = mysql.connector.connect(
             host='localhost',
             user='root',        
-            password='',
+            password='anthony',
             database='queue_system',
         )
         if conn.is_connected():
